@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+ 
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+
+  // RELAÇÃO com Imoveis (um consultor pode ter vários imóveis)
+  imoveis   Imoveis[]
+}
+
+model Imoveis {
+  id          String    @id @default(cuid())
+  nome        String
+  descricao   String
+  endereco    String
+  area        Float
+  quartos     Int
+  banheiros   Int
+  vaga        Int
+  preco       Decimal
+  iptu        Decimal
+  criadoEm    DateTime  @default(now())
+
+  consultorId String
+  consultor   Usuario   @relation(fields: [consultorId], references: [id])
+}
