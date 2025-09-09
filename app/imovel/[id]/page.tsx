@@ -2,6 +2,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import ShareButton from "@/components/ShareButton";
 
 interface Imovel {
   id: string;
@@ -58,10 +59,9 @@ export default function VillaPage() {
            <h1 className="text-3xl font-bold">{imovel.nome}</h1>  {/* Inserir a informação Titulo da API */}
           <p className="text-gray-500">{imovel.cidade} · {imovel.endereco}</p>
         </div>
-        <div className="flex gap-3">
-          <button className="p-2 rounded-full border hover:bg-gray-100">♡</button>
-          <button className="p-2 rounded-full border hover:bg-gray-100">⇪</button>
-        </div>
+        {/* <div className="flex gap-3">
+          <ShareButton text={imovel.descricao} url={`localhost:3000/imovel/${id}`} title={imovel.nome}/>
+        </div> */}
       </div>
 
       {/* Galeria */}
@@ -77,7 +77,7 @@ export default function VillaPage() {
           ))}
         </div>
       </div>
-
+        <div className="border-b-2 w-full border-gray-200 mb-6"></div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Descrição */}
         <div className="md:col-span-2">

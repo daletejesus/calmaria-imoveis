@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { signIn, useSession, signOut } from "@/lib/auth-client";
-import { div } from "framer-motion/client";
+import { redirect } from "next/navigation";
 
 export default function LoginPage() {
   const { data: session, isPending } = useSession();
@@ -12,14 +12,7 @@ export default function LoginPage() {
   if (isPending) return <p>Carregando...</p>;
 
   if (session) {
-    return (
-      <div className="flex flex-col gap-4">
-        <p>Bem-vindo, {session.user.email}</p>
-        <button onClick={() => signOut()} className="bg-red-500 text-white p-2 rounded">
-          Sair
-        </button>
-      </div>
-    );
+    redirect("/dashboard");
   }
 
   return (

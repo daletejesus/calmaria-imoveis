@@ -7,7 +7,7 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
-    const { 
+    let { 
       nome, email, telefone, mensagem
     } = body as {
       nome: string, 
@@ -25,13 +25,17 @@ export async function POST(req: Request) {
       );
     }
 
-
+    if (!telefone.startsWith("55")) {
+      telefone = "55" + telefone;
+    }
+      
     const novoContato = await prisma.contato.create({
       data: {
         nome,
         email,
         telefone,
-        mensagem
+        mensagem,
+        status: true
       },
     });
 
@@ -48,7 +52,6 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     const imoveis = await prisma.contato.findMany({
-      where: { status: true }
     })
 
     return NextResponse.json(imoveis);

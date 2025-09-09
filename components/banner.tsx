@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div style={{ position: "relative", width: "100%", height: "550px", overflow: "hidden" }}>
+    <div style={{ position: "relative", width: "100%", height: "550px", overflow: "hidden" }} className="flex items-center justify-center">
       <Image
         src="/banner.jpg"
         alt="Imagem horizontal"
@@ -12,26 +12,11 @@ export default function Banner() {
         style={{ objectFit: "cover" }}
         priority
       />
-      {/* <h2
-        style={{
-          position: "absolute",
-          top: "70px",
-          left: "35%",
-          transform: "translateX(-50%)",
-          color: "white",
-          fontSize: "2rem",
-          fontWeight: "bold",
-          textShadow: "2px 2px 6px rgba(0,0,0,0.7)",
-          margin: 0,
-          padding: 0,
-          textAlign: "center",
-          zIndex: 10,
-          whiteSpace: "pre-line",
-        }}
-      >
-        {`Encontre sua casa dos sonhos e viva a 
-        tranquilidade que você merece`}
-      </h2> */}
+      <div className="absolute inset-0 bg-black opacity-50 z-0"></div> 
+      <h2 className="text-4xl text-white font-bold z-50">
+        Encontre sua casa dos sonhos e viva a 
+        tranquilidade que você merece
+      </h2>
     </div>
   );
 }

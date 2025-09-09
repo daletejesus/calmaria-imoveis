@@ -39,12 +39,12 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="text-black flex min-h-screen items-center justify-center bg-gray-100">
+    <div className="text-black flex min-h-screen items-center justify-center">
       <form
         onSubmit={handleSignUp}
         className="bg-white p-8 rounded shadow-md w-96 flex flex-col gap-4"
       >
-        <h1 className="text-2xl font-bold text-center">Cadastro</h1>
+        <h1 className="text-2xl font-bold text-center">Cadastro de Usuario</h1>
 
         {error && (
           <p className="text-red-500 text-sm text-center">{error}</p>
@@ -79,7 +79,7 @@ export default function SignUpPage() {
 
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded disabled:opacity-50"
+          className="bg-gray-700 text-white p-2 rounded disabled:opacity-50"
           disabled={loading}
         >
           {loading ? "Cadastrando..." : "Cadastrar"}

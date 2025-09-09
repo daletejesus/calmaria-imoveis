@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const { 
-      nome, descricao, endereco, area, quartos, cidade, banheiros, vaga, preco, iptu, consultorEmail, images
+      nome, descricao, endereco, area, quartos, cidade, banheiros, vaga, preco, iptu, consultorEmail
     } = body as {
       nome: string, 
       descricao: string,
@@ -26,11 +26,12 @@ export async function POST(req: Request) {
       vaga: number,
       preco: number,
       iptu: number,
-      consultorEmail: string,
-      images: string[],
+      consultorEmail: string
     };
 
-    console.log(images)
+    
+    console.log(nome, descricao, endereco, area, quartos, cidade, banheiros, vaga, preco, iptu, consultorEmail)
+    
 
     if (!consultorEmail) {
       return NextResponse.json(
@@ -38,18 +39,6 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-
-    const usuario = await prisma.usuario.findUnique({
-      where: { email: consultorEmail },
-    });
-
-    if (!usuario) {
-      return NextResponse.json(
-        { error: "Consultor não encontrado." },
-        { status: 404 }
-      );
-    }
-
 
     const novoImovel = await prisma.imoveis.create({
       data: {
@@ -62,12 +51,7 @@ export async function POST(req: Request) {
         banheiros,
         vaga,
         preco,
-        iptu,
-        consultor: {
-          connect: {
-            id: usuario.id,
-          },
-        },
+        iptu
       },
     });
 

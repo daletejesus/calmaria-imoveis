@@ -59,10 +59,10 @@ export default function ContactForm() {
       <div className="flex-1">
         <p className="text-gray-900 text-sm mb-2">Contato</p>
         <h2 className="text-4xl text-black font-bold leading-snug mb-4">
-          Colocar um texto <br /> legal aqui!
+          Fale conosco agora!
         </h2>
-        <p className="text-gray-600 max-w-md">
-          Subtitulo para informar sobre o contato
+        <p className="text-gray-600 max-w-md text-xl">
+          Entre em contato e receba nosso atendimento pelo whatsapp!
         </p>
       </div>
 

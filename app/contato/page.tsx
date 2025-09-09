@@ -14,7 +14,7 @@ export default function ContatoPage() {
       }}
     >
       {/* Botão de voltar */}
-      <div style={{ marginBottom: '2rem' }}>
+      {/* <div style={{ marginBottom: '2rem' }}>
         <button
           onClick={() => router.push('/')}
           style={{
@@ -31,7 +31,7 @@ export default function ContatoPage() {
         >
           ← Voltar
         </button>
-      </div>
+      </div> */}
 
       {/* Container flexível */}
       <div

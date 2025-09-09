@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import NewButton from "@/components/button"
 import Banner from "../components/banner"
 import BoxImovel from "@/components/imovel-box"
 import {Button} from '@heroui/button'; 
@@ -48,12 +47,12 @@ export default function Home() {
   if (loading && !properties) return <p className="text-white">Carregando imóveis...</p>;
 
   return (
-    <main>
+    <main className="my-20">
       {/* Banner com imagem e frase */}
       <Banner />
 
       {/* Filtros de busca */}
-      <section className="bg-white p-6 flex justify-center gap-4 shadow-md">
+      {/* <section className="bg-white p-6 flex justify-center gap-4 shadow-md">
         <select className="border p-2 rounded">
           <option>Imóvel</option>
         </select>
@@ -66,14 +65,14 @@ export default function Home() {
         <button className="bg-yellow-700 text-white px-4 py-2 rounded hover:bg-yellow-800">
           Buscar
         </button>
-      </section>
+      </section> */}
 
       <div className="w-full px-10 mt-10">
         <div className="my-6">
           <PageTextH2 text="Explorar" />
         </div>
-        <div className="w-full flex gap-4">
-          {properties.map((property) => (
+        <div className="w-full flex items-center justify-center gap-4">
+          {properties.slice(0, 4).map((property) => (
             <BoxImovel
               key={property.id}
               id={property.id}

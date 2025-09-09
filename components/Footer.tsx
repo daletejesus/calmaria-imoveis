@@ -17,7 +17,7 @@ export default function Footer() {
     //     </p>
     //   </div>
     // </footer>
-    <footer className="w-full bg-[#2b2b2b] py-10 flex items-center justify-center text-white mt-10 rounded-t-3xl">
+    <footer className="absolute fixed bottom-0 z-50 w-full bg-[#2b2b2b] py-10 flex items-center justify-center text-white mt-10 rounded-t-3xl">
       <div>
         <p>
           © 2025 Calmaria Imobiliária. Todos os direitos reservados. Barueri - São Paulo

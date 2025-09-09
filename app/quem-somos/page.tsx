@@ -14,7 +14,7 @@ export default function SobreNosPage() {
       }}
     >
       {/* Botão Voltar */}
-      <button
+      {/* <button
         onClick={() => router.replace('/')}
         style={{
           position: 'absolute',
@@ -33,7 +33,7 @@ export default function SobreNosPage() {
         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FFFF00')}
       >
         ← Voltar
-      </button>
+      </button> */}
 
       {/* Container flexível */}
       <div
