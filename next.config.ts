@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Sem experimental.appDir
+  images: {
+    domains: [
+      'res.cloudinary.com',
+    ],
+  },
 };
 
 export default nextConfig;

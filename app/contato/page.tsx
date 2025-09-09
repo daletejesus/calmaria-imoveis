@@ -1,4 +1,5 @@
 'use client'
+import ContactForm from '@/components/form-contato'
 import { useRouter } from 'next/navigation'
 
 export default function ContatoPage() {
@@ -98,7 +99,11 @@ export default function ContatoPage() {
             }}
           />
         </section>
+
+        
       </div>
+
+      <ContactForm />
     </main>
   )
 }

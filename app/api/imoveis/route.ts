@@ -2,20 +2,35 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+export const config = {
+  api: {
+    bodyParser: false, // necessário para upload de arquivos
+  },
+};
+
 export async function POST(req: Request) {
   try {
-    const formData = await req.formData();
 
-    const nome = formData.get("nome") as string;
-    const descricao = formData.get("descricao") as string;
-    const endereco = formData.get("endereco") as string;
-    const area = parseFloat(formData.get("area") as string);
-    const quartos = parseInt(formData.get("quartos") as string);
-    const banheiros = parseInt(formData.get("banheiros") as string);
-    const vaga = parseInt(formData.get("vaga") as string);
-    const preco = parseFloat(formData.get("preco") as string);
-    const iptu = parseFloat(formData.get("iptu") as string);
-    const consultorEmail = formData.get("consultorEmail") as string;
+    const body = await req.json();
+
+    const { 
+      nome, descricao, endereco, area, quartos, cidade, banheiros, vaga, preco, iptu, consultorEmail, images
+    } = body as {
+      nome: string, 
+      descricao: string,
+      endereco: string,
+      area: number,
+      quartos: number,
+      cidade: string,
+      banheiros: number,
+      vaga: number,
+      preco: number,
+      iptu: number,
+      consultorEmail: string,
+      images: string[],
+    };
+
+    console.log(images)
 
     if (!consultorEmail) {
       return NextResponse.json(
@@ -35,8 +50,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Aqui você pode pegar a imagem também se quiser tratar
-    // const imagem = formData.get("imagem") as File;
 
     const novoImovel = await prisma.imoveis.create({
       data: {
@@ -44,6 +57,7 @@ export async function POST(req: Request) {
         descricao,
         endereco,
         area,
+        cidade,
         quartos,
         banheiros,
         vaga,
@@ -57,11 +71,58 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(novoImovel);
+    return NextResponse.json({ id: novoImovel.id }, { status: 201 });
+    
   } catch (error) {
     console.error("Erro ao cadastrar imóvel:", error);
     return NextResponse.json(
       { error: "Erro interno ao cadastrar imóvel." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (id) {
+
+      const imovel = await prisma.imoveis.findUnique({
+        where: { id: id },
+        include: {
+          imagens: true// Inclui as imagens relacionadas
+        }
+      });
+
+      console.log(imovel)
+
+      if (!imovel) {
+        return NextResponse.json(
+          { error: "Imóvel não encontrado." },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json(imovel);
+    }
+
+    // Buscar todos os imóveis com status true
+    const imoveis = await prisma.imoveis.findMany({
+      where: { status: true },
+      include: {
+        imagens: true// Inclui as imagens relacionadas
+      }
+    });
+
+    console.log(imoveis)
+
+    return NextResponse.json(imoveis);
+  } catch (error) {
+    console.error("Erro ao retornar imóveis:", error);
+    return NextResponse.json(
+      { error: "Erro ao retornar imóveis." },
       { status: 500 }
     );
   }

@@ -3,16 +3,16 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div style={{ position: "relative", width: "100%", height: "300px", overflow: "hidden" }}>
+    <div style={{ position: "relative", width: "100%", height: "550px", overflow: "hidden" }}>
       <Image
-        src="/casa-body.jpg"
+        src="/banner.jpg"
         alt="Imagem horizontal"
         fill
         sizes="100vw"
         style={{ objectFit: "cover" }}
         priority
       />
-      <h2
+      {/* <h2
         style={{
           position: "absolute",
           top: "70px",
@@ -31,7 +31,7 @@ export default function Banner() {
       >
         {`Encontre sua casa dos sonhos e viva a 
         tranquilidade que você merece`}
-      </h2>
+      </h2> */}
     </div>
   );
 }
